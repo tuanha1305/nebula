@@ -92,19 +92,13 @@ jobs:
 
           lipo -create -output ./release/nebula ./build/darwin-amd64/nebula ./build/darwin-arm64/nebula
           lipo -create -output ./release/nebula-cert ./build/darwin-amd64/nebula-cert ./build/darwin-arm64/nebula-cert
-
-          codesign -s "10BC1FDDEB6CE753550156C0669109FAC49E4D1E" -f -v --timestamp --options=runtime ./release/nebula
-          codesign -s "10BC1FDDEB6CE753550156C0669109FAC49E4D1E" -f -v --timestamp --options=runtime ./release/nebula-cert
-
-          hdiutil create -volname "nebula" -format UDZO -srcfolder release/ release/nebula.dmg
-          codesign -s "10BC1FDDEB6CE753550156C0669109FAC49E4D1E" -f -v --timestamp ./release/nebula.dmg
           gon $GITHUB_WORKSPACE/.github/workflows/notarize.hcl
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: darwin-latest
-          path: release/nebula.dmg
+          path: nebula.dmg
 
 #  release:
 #    name: Create and Upload Release
