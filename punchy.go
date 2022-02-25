@@ -41,6 +41,7 @@ func NewPunchyFromConfig(l *logrus.Logger, c *config.C) *Punchy {
 
 func (p *Punchy) reload(c *config.C) {
 	np := NewPunchyFromConfig(p.l, c)
+	//TODO: it should be relatively easy to support this, just need to be able to cancel the goroutine and boot it up from here
 	if np.Punch != p.Punch {
 		p.l.Warn("Changing punchy.punch with reload is not supported, ignoring.")
 	}
